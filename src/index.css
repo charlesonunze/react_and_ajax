@@ -1,0 +1,13 @@
+body {
+	margin: 0;
+	font-family: 'Archia';
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: #010413;
+}
+
+div,
+button,
+article {
+	border-radius: 7px;
+}
