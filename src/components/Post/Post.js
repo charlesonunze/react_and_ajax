@@ -4,9 +4,16 @@ import './Post.css';
 
 const post = props => (
 	<article className='Post'>
-		<h1>Title</h1>
+		<div
+			style={{
+				height: '150px'
+			}}
+		>
+			<h1>{props.title}</h1>
+		</div>
+		<hr />
 		<div className='Info'>
-			<div className='Author'>Author</div>
+			<div className='Author'>{props.author}</div>
 		</div>
 	</article>
 );
