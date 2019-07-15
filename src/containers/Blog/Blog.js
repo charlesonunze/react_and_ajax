@@ -36,11 +36,9 @@ class Blog extends Component {
 			this.state.posts.length > 0
 				? this.state.posts.map(post => (
 						<Post
-							id={post.id}
 							key={post.id}
 							title={post.title}
 							author={post.author}
-							userId={post.userId}
 							viewPost={() => this.viewPostHandler(post.id)}
 						/>
 				  ))
