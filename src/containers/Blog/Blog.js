@@ -8,54 +8,52 @@ import axios from 'axios';
 
 class Blog extends Component {
 	state = {
-		posts: [
-			{
-				id: 1,
-				userId: 1,
-				title: 'Title One',
-				body: 'quia et suscipit suscipit'
-			}
-		]
+		posts: [],
+		currentPostId: null
 	};
 
-	async getUser() {
-		try {
-			const response = await axios.get(
-				'https://jsonplaceholder.typicode.com/posts'
-			);
-			return response.data;
-		} catch (error) {
-			console.error(error);
-		}
+	viewPostHandler(id) {
+		this.setState({ currentPostId: id });
 	}
 
 	componentDidMount() {
-		this.getUser().then(data => {
-			let posts = data
-				.slice(0, 4)
-				.map(e => ({ ...e, author: 'Charles' }));
-			console.log(posts);
-			this.setState({ posts });
-		});
+		axios
+			.get('https://jsonplaceholder.typicode.com/posts')
+			.then(res => {
+				const posts = res.data
+					.slice(0, 4)
+					.map(e => ({ ...e, author: 'Charles' }));
+				this.setState({ posts });
+			})
+			.catch(e => {
+				let posts = [...this.state.posts];
+				this.setState({ posts });
+			});
 	}
 
 	render() {
-		const posts = this.state.posts.map(post => (
-			<Post
-				id={post.id}
-				key={post.id}
-				title={post.title}
-				author={post.author}
-				userId={post.userId}
-			/>
-		));
+		const posts =
+			this.state.posts.length > 0
+				? this.state.posts.map(post => (
+						<Post
+							id={post.id}
+							key={post.id}
+							title={post.title}
+							author={post.author}
+							userId={post.userId}
+							viewPost={() => this.viewPostHandler(post.id)}
+						/>
+				  ))
+				: null;
 
 		return (
 			<div>
 				<section className='Posts'>{posts}</section>
+
 				<section>
-					<FullPost />
+					<FullPost postId={this.state.currentPostId} />
 				</section>
+
 				<section>
 					<NewPost />
 				</section>

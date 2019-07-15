@@ -1,10 +1,19 @@
 .FullPost {
-	width: 80%;
+	width: 90%;
 	margin: 20px auto;
 	border: 1px solid #eee;
-	text-align: center;
 	background-color: #001122;
 	color: orange;
+}
+
+.Content {
+	padding: 0 10px;
+}
+
+.Edit {
+	display: block;
+	margin: 0 auto;
+	text-align: center;
 }
 
 .Edit label {
